@@ -1,4 +1,4 @@
-rootProject.name = "MyApplication"
+rootProject.name = "Water Reminder"
 
 include(":androidApp")
 include(":shared")
