@@ -75,6 +75,11 @@ private fun MainContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Text(
+            text = "350ml",
+            fontSize = 40.sp
+        )
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
