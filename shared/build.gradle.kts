@@ -24,7 +24,7 @@ kotlin {
         }
         extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
-    val voyagerVersion = "1.0.0-rc05"
+    val voyagerVersion = "1.0.0-rc06"
 
     sourceSets {
         val commonMain by getting {
