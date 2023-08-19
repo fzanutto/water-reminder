@@ -1,8 +1,6 @@
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import presentation.reminder.ReminderScreen
+import presentation.reminder.ReminderScreenContent
 
 actual fun getPlatformName(): String = "Android"
 
@@ -11,5 +9,5 @@ actual fun getPlatformName(): String = "Android"
 @Preview
 @Composable
 fun ReminderScreenPreview() {
-    ReminderScreen()
+    ReminderScreenContent(onEvent = {})
 }
