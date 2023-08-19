@@ -40,6 +40,8 @@ kotlin {
                 api("androidx.activity:activity-compose:1.6.1")
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.9.0")
+                api(compose.preview)
+                api(compose.uiTooling)
             }
         }
         val iosX64Main by getting
@@ -65,6 +67,12 @@ android {
     defaultConfig {
         minSdk = (findProperty("android.minSdk") as String).toInt()
         targetSdk = (findProperty("android.targetSdk") as String).toInt()
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
