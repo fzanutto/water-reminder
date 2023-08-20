@@ -9,13 +9,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.Button
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
@@ -37,7 +39,7 @@ class OnboardingScreen: Screen {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreenContent(
     onEvent: (OnboardingScreenEvent) -> Unit
@@ -58,6 +60,11 @@ fun OnboardingScreenContent(
                 .padding(it)
                 .padding(32.dp)
         ) { currentPage ->
+            if (LocalInspectionMode.current) {
+                OnboardingThirdPage()
+                return@HorizontalPager
+            }
+
             when (currentPage) {
                 0 -> OnboardingFirstPage()
                 1 -> OnboardingSecondPage()
@@ -126,6 +133,7 @@ fun OnboardingFirstPage() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingSecondPage() {
     Column {
@@ -143,6 +151,7 @@ fun OnboardingSecondPage() {
 fun OnboardingThirdPage() {
     Column {
         Text("At what time do you want the first and the last reminder?")
+
     }
 }
 
