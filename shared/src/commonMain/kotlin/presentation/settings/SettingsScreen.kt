@@ -16,7 +16,10 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import di.injector
+import org.kodein.di.instance
 import presentation.components.TopBar
 
 class SettingsScreen: Screen {
@@ -25,7 +28,8 @@ class SettingsScreen: Screen {
         val navigator = LocalNavigator.currentOrThrow
 
         val screenModel = rememberScreenModel {
-            SettingsScreenModel(navigator = navigator)
+            val screenModel by injector.instance<Navigator, SettingsScreenModel>(arg = navigator)
+            screenModel
         }
 
         SettingsScreenContent(

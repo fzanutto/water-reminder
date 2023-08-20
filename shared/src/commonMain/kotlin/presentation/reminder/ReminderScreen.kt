@@ -32,9 +32,12 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import di.injector
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.kodein.di.instance
 import presentation.components.TopBar
 
 
@@ -43,7 +46,8 @@ class ReminderScreen: Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val screenModel = rememberScreenModel {
-            ReminderScreenModel(navigator = navigator)
+            val screenModel by injector.instance<Navigator, ReminderScreenModel>(arg = navigator)
+            screenModel
         }
 
         ReminderScreenContent(
