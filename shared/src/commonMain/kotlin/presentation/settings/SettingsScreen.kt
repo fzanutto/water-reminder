@@ -82,7 +82,7 @@ private fun MainContent(
         OutlinedTextField(
             value = weight,
             onValueChange = { onEvent(SettingsScreenEvent.OnChangeWeight(it)) },
-            label = { Text("Weight") },
+            label = { Text("Weight (kg)") },
             modifier = Modifier.fillMaxWidth()
         )
     }
