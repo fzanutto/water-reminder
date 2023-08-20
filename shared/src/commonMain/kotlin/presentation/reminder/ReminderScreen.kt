@@ -29,15 +29,13 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import di.injector
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import org.kodein.di.instance
 import presentation.components.TopBar
 
 
@@ -45,10 +43,7 @@ class ReminderScreen: Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val screenModel = rememberScreenModel {
-            val screenModel by injector.instance<Navigator, ReminderScreenModel>(arg = navigator)
-            screenModel
-        }
+        val screenModel = rememberScreenModel<Navigator, ReminderScreenModel>(arg = navigator)
 
         ReminderScreenContent(
             screenModel::onEvent
