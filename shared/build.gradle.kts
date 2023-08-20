@@ -37,6 +37,9 @@ kotlin {
 
                 // Navigator
                 implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
+
+                // Kodein integration (DI)
+                implementation("cafe.adriel.voyager:voyager-kodein:$voyagerVersion")
             }
         }
         val androidMain by getting {
