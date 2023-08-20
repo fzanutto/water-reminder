@@ -2,16 +2,16 @@
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
-import di.injector
 import org.kodein.di.compose.withDI
-import presentation.reminder.ReminderScreen
+import presentation.di.presentationModule
+import presentation.onboarding.OnboardingScreen
 
 @Composable
 fun App() {
-    withDI(injector) {
+    withDI(presentationModule) {
         MaterialTheme {
             Navigator(
-                ReminderScreen()
+                OnboardingScreen()
             )
         }
     }
