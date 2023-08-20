@@ -39,12 +39,12 @@ class OnboardingScreen: Screen {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnboardingScreenContent(
     onEvent: (OnboardingScreenEvent) -> Unit
 ) {
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { 5 })
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
@@ -53,7 +53,6 @@ fun OnboardingScreenContent(
         }
     ) {
         HorizontalPager(
-            pageCount = 5,
             state = pagerState,
             modifier = Modifier
                 .fillMaxSize()
