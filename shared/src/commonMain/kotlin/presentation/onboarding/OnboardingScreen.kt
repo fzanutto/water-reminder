@@ -1,6 +1,7 @@
 package presentation.onboarding
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -18,9 +20,11 @@ import androidx.compose.material3.TimeInput
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -61,17 +65,12 @@ fun OnboardingScreenContent(
                 .padding(it)
                 .padding(32.dp)
         ) { currentPage ->
-            if (LocalInspectionMode.current) {
-                OnboardingThirdPage()
-                return@HorizontalPager
-            }
-
             when (currentPage) {
-                0 -> OnboardingFirstPage()
-                1 -> OnboardingSecondPage()
-                2 -> OnboardingThirdPage()
-                3 -> OnboardingFourthPage()
-                4 -> OnboardingFifthPage()
+                0 -> OnboardingFirstPage(onEvent = onEvent)
+                1 -> OnboardingSecondPage(onEvent = onEvent)
+                2 -> OnboardingThirdPage(onEvent = onEvent)
+                3 -> OnboardingFourthPage(onEvent = onEvent)
+                4 -> OnboardingFifthPage(onEvent = onEvent)
             }
         }
     }
@@ -127,29 +126,45 @@ private fun OnboardingBottomBar(
 }
 
 @Composable
-fun OnboardingFirstPage() {
-    Column {
-        Text("Welcome to Water Reminder!")
-        Text("Let's get started")
+fun OnboardingFirstPage(
+    onEvent: (OnboardingScreenEvent) -> Unit
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text(
+            text = "Welcome to Water Reminder!",
+            fontSize = 24.sp
+        )
+        Text(
+            text = "Let's get started",
+            fontSize = 16.sp
+        )
     }
 }
 
 @Composable
-fun OnboardingSecondPage() {
+fun OnboardingSecondPage(
+    onEvent: (OnboardingScreenEvent) -> Unit
+) {
     Column {
         Text("How much do you weigh?")
         OutlinedTextField(
             value = "",
-            onValueChange = {},
-            label = { Text("Weight") }
+            onValueChange = { onEvent(OnboardingScreenEvent.OnWeightChanged(it)) },
+            label = { Text("Weight") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Text("You should drink ~2.5L of water per day")
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OnboardingThirdPage() {
+fun OnboardingThirdPage(
+    onEvent: (OnboardingScreenEvent) -> Unit
+) {
     Column {
         Text("At what time do you want the first and the last reminder?")
 
@@ -169,19 +184,23 @@ fun OnboardingThirdPage() {
 }
 
 @Composable
-fun OnboardingFourthPage() {
+fun OnboardingFourthPage(
+    onEvent: (OnboardingScreenEvent) -> Unit
+) {
     Column {
          Text("How often do you want to be reminded?")
         OutlinedTextField(
             value = "",
-            onValueChange = {},
+            onValueChange = { onEvent(OnboardingScreenEvent.OnIntervalChanged(it)) },
             label = { Text("Reminder frequency") }
         )
     }
 }
 
 @Composable
-fun OnboardingFifthPage() {
+fun OnboardingFifthPage(
+    onEvent: (OnboardingScreenEvent) -> Unit
+) {
     Column {
         Text("Is every thing correct?")
         Text("You weigh 80kg")

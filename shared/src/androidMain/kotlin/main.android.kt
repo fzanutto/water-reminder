@@ -1,6 +1,11 @@
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import presentation.onboarding.OnboardingScreenContent
+import presentation.onboarding.OnboardingFifthPage
+import presentation.onboarding.OnboardingFirstPage
+import presentation.onboarding.OnboardingFourthPage
+import presentation.onboarding.OnboardingSecondPage
+import presentation.onboarding.OnboardingThirdPage
 import presentation.reminder.ReminderScreenContent
 import presentation.settings.SettingsScreenContent
 
@@ -23,6 +28,30 @@ private fun SettingsScreenPreview() {
 
 @Preview
 @Composable
-fun OnboardingScreenPreview() {
-    OnboardingScreenContent(onEvent = {})
+fun OnboardingScreenPreview1() {
+    OnboardingFirstPage(onEvent = {})
+}
+
+@Preview
+@Composable
+fun OnboardingScreenPreview2() {
+    OnboardingSecondPage(onEvent = {})
+}
+
+@Preview
+@Composable
+fun OnboardingScreenPreview3() {
+    OnboardingThirdPage(onEvent = {})
+}
+
+@Preview
+@Composable
+fun OnboardingScreenPreview4() {
+    OnboardingFourthPage(onEvent = {})
+}
+
+@Preview
+@Composable
+fun OnboardingScreenPreview5() {
+    OnboardingFifthPage(onEvent = {})
 }
