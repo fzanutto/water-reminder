@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
@@ -21,6 +22,7 @@ import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class OnboardingScreen: Screen {
@@ -45,45 +47,7 @@ fun OnboardingScreenContent(
 
     Scaffold(
         bottomBar = {
-            Row {
-                if (pagerState.currentPage > 0) {
-                    Button(
-                        onClick = {
-                            coroutineScope.launch {
-                                pagerState.animateScrollToPage(pagerState.currentPage - 1)
-                            }
-                        },
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .weight(1f)
-                    ) {
-                        Text("Back")
-                    }
-                } else {
-                    Spacer(modifier = Modifier.padding(16.dp).weight(1f))
-                }
-
-                Button(
-                    onClick = {
-                        coroutineScope.launch {
-                            if (pagerState.currentPage < 4) {
-                                pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                            } else {
-                                onEvent(OnboardingScreenEvent.OnFinishOnboarding)
-                            }
-                        }
-                    },
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .weight(1f)
-                ) {
-                    if (pagerState.currentPage < 4) {
-                        Text("Next")
-                    } else {
-                        Text("Finish")
-                    }
-                }
-            }
+            OnboardingBottomBar(pagerState, coroutineScope, onEvent)
         }
     ) {
         HorizontalPager(
@@ -92,6 +56,7 @@ fun OnboardingScreenContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
+                .padding(32.dp)
         ) { currentPage ->
             when (currentPage) {
                 0 -> OnboardingFirstPage()
@@ -103,6 +68,54 @@ fun OnboardingScreenContent(
         }
     }
 
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun OnboardingBottomBar(
+    pagerState: PagerState,
+    coroutineScope: CoroutineScope,
+    onEvent: (OnboardingScreenEvent) -> Unit
+) {
+    Row {
+        if (pagerState.currentPage > 0) {
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                    }
+                },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .weight(1f)
+            ) {
+                Text("Back")
+            }
+        } else {
+            Spacer(modifier = Modifier.padding(16.dp).weight(1f))
+        }
+
+        Button(
+            onClick = {
+                coroutineScope.launch {
+                    if (pagerState.currentPage < 4) {
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    } else {
+                        onEvent(OnboardingScreenEvent.OnFinishOnboarding)
+                    }
+                }
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .weight(1f)
+        ) {
+            if (pagerState.currentPage < 4) {
+                Text("Next")
+            } else {
+                Text("Finish")
+            }
+        }
+    }
 }
 
 @Composable
