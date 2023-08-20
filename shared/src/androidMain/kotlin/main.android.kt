@@ -14,5 +14,8 @@ private fun ReminderScreenPreview() {
 @Preview
 @Composable
 private fun SettingsScreenPreview() {
-    SettingsScreenContent(onEvent = {})
+    SettingsScreenContent(
+        onEvent = {},
+        weight = "63"
+    )
 }
