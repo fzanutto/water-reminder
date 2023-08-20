@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -33,14 +31,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import presentation.components.TopBar
 
 
 class ReminderScreen: Screen {
     @Composable
     override fun Content() {
-        val screenModel = rememberScreenModel { ReminderScreenModel() }
+        val navigator = LocalNavigator.currentOrThrow
+        val screenModel = rememberScreenModel {
+            ReminderScreenModel(navigator = navigator)
+        }
+
         ReminderScreenContent(
             screenModel::onEvent
         )
@@ -53,22 +58,13 @@ fun ReminderScreenContent(
 ) {
     Scaffold(
         topBar = {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                IconButton(
-                    onClick = {
-                        onEvent(ReminderScreenEvent.OnClickSettings)
-                    }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = null,
-                        modifier = Modifier.size(32.dp)
-                    )
+            TopBar(
+                title = "",
+                trailingIcon = Icons.Default.Settings,
+                onClickTrailingIcon = {
+                    onEvent(ReminderScreenEvent.OnClickSettings)
                 }
-            }
+            )
         }
     ) {
         MainContent(it)
