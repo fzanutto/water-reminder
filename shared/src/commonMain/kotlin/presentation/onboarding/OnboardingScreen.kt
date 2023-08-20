@@ -14,6 +14,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TimeInput
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -132,7 +134,6 @@ fun OnboardingFirstPage() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingSecondPage() {
     Column {
@@ -146,11 +147,24 @@ fun OnboardingSecondPage() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingThirdPage() {
     Column {
         Text("At what time do you want the first and the last reminder?")
 
+        val firstTimePickerState = rememberTimePickerState()
+        val lastTimePickerState = rememberTimePickerState()
+
+        Text("First reminder")
+        TimeInput(
+            state = firstTimePickerState
+        )
+
+        Text("Last reminder")
+        TimeInput(
+            state = lastTimePickerState
+        )
     }
 }
 
@@ -158,6 +172,11 @@ fun OnboardingThirdPage() {
 fun OnboardingFourthPage() {
     Column {
          Text("How often do you want to be reminded?")
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Reminder frequency") }
+        )
     }
 }
 
