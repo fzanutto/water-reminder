@@ -11,7 +11,6 @@ class ReminderScreenModel(
     fun onEvent(event: ReminderScreenEvent) {
         when (event) {
             is ReminderScreenEvent.OnClickSettings -> {
-                println("clicked settings button")
                 navigator.push(SettingsScreen())
             }
         }

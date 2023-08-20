@@ -13,9 +13,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import presentation.components.TopBar
 
@@ -23,10 +24,7 @@ class SettingsScreen: Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-
-        val screenModel = rememberScreenModel {
-            SettingsScreenModel(navigator = navigator)
-        }
+        val screenModel = rememberScreenModel<Navigator, SettingsScreenModel>(arg = navigator)
 
         SettingsScreenContent(
             onEvent = screenModel::onEvent,
