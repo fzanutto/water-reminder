@@ -25,6 +25,7 @@ jobs:
         env:
           scheme: ${{ 'default' }}
         run: |
+          cd iosApp
           pwd
           ls
           if [ $scheme = default ]; then scheme=$(cat default); fi
