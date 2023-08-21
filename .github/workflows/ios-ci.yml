@@ -1,4 +1,4 @@
-name: Xcode - Build and Analyze
+name: iOS CI
 
 on:
   push:
@@ -8,12 +8,12 @@ on:
 
 jobs:
   build:
-    name: Build and analyse default scheme using xcodebuild command
     runs-on: self-hosted
 
     steps:
-      - name: Checkout
+      - name: Checkout PR code
         uses: actions/checkout@v3
+
       - name: set up JDK 17
         uses: actions/setup-java@v3
         with:
