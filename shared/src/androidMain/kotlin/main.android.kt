@@ -4,6 +4,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import presentation.onboarding.OnboardingFifthPage
 import presentation.onboarding.OnboardingFirstPage
 import presentation.onboarding.OnboardingFourthPage
+import presentation.onboarding.OnboardingScreenUiState
 import presentation.onboarding.OnboardingSecondPage
 import presentation.onboarding.OnboardingThirdPage
 import presentation.reminder.ReminderScreenContent
@@ -29,13 +30,13 @@ private fun SettingsScreenPreview() {
 @Preview
 @Composable
 fun OnboardingScreenPreview1() {
-    OnboardingFirstPage(onEvent = {})
+    OnboardingFirstPage()
 }
 
 @Preview
 @Composable
 fun OnboardingScreenPreview2() {
-    OnboardingSecondPage(onEvent = {})
+    OnboardingSecondPage(onWeightChanged = {}, weight = "63")
 }
 
 @Preview
@@ -47,11 +48,15 @@ fun OnboardingScreenPreview3() {
 @Preview
 @Composable
 fun OnboardingScreenPreview4() {
-    OnboardingFourthPage(onEvent = {})
+    val uiState = OnboardingScreenUiState()
+    OnboardingFourthPage(onEvent = {}, uiState = uiState)
 }
 
 @Preview
 @Composable
 fun OnboardingScreenPreview5() {
-    OnboardingFifthPage(onEvent = {})
+    val uiState = OnboardingScreenUiState(
+        weight = "63",
+    )
+    OnboardingFifthPage(uiState = uiState)
 }

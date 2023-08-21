@@ -40,7 +40,8 @@ class OnboardingScreen: Screen {
         val screenModel = rememberScreenModel<Navigator, OnboardingScreenModel>(arg = navigator)
 
         OnboardingScreenContent(
-            onEvent = screenModel::onEvent
+            onEvent = screenModel::onEvent,
+            uiState = screenModel.uiState
         )
     }
 }
@@ -48,7 +49,8 @@ class OnboardingScreen: Screen {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnboardingScreenContent(
-    onEvent: (OnboardingScreenEvent) -> Unit
+    onEvent: (OnboardingScreenEvent) -> Unit,
+    uiState: OnboardingScreenUiState
 ) {
     val pagerState = rememberPagerState(pageCount = { 5 })
     val coroutineScope = rememberCoroutineScope()
@@ -66,11 +68,11 @@ fun OnboardingScreenContent(
                 .padding(32.dp)
         ) { currentPage ->
             when (currentPage) {
-                0 -> OnboardingFirstPage(onEvent = onEvent)
-                1 -> OnboardingSecondPage(onEvent = onEvent)
+                0 -> OnboardingFirstPage()
+                1 -> OnboardingSecondPage(onWeightChanged = onEvent, weight = uiState.weight)
                 2 -> OnboardingThirdPage(onEvent = onEvent)
-                3 -> OnboardingFourthPage(onEvent = onEvent)
-                4 -> OnboardingFifthPage(onEvent = onEvent)
+                3 -> OnboardingFourthPage(onEvent = onEvent, uiState = uiState)
+                4 -> OnboardingFifthPage(uiState = uiState)
             }
         }
     }
@@ -126,9 +128,7 @@ private fun OnboardingBottomBar(
 }
 
 @Composable
-fun OnboardingFirstPage(
-    onEvent: (OnboardingScreenEvent) -> Unit
-) {
+fun OnboardingFirstPage() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -147,13 +147,14 @@ fun OnboardingFirstPage(
 
 @Composable
 fun OnboardingSecondPage(
-    onEvent: (OnboardingScreenEvent) -> Unit
+    onWeightChanged: (OnboardingScreenEvent.OnWeightChanged) -> Unit,
+    weight: String
 ) {
     Column {
         Text("How much do you weigh?")
         OutlinedTextField(
-            value = "",
-            onValueChange = { onEvent(OnboardingScreenEvent.OnWeightChanged(it)) },
+            value = weight,
+            onValueChange = { onWeightChanged(OnboardingScreenEvent.OnWeightChanged(it)) },
             label = { Text("Weight") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
@@ -168,8 +169,10 @@ fun OnboardingThirdPage(
     Column {
         Text("At what time do you want the first and the last reminder?")
 
-        val firstTimePickerState = rememberTimePickerState()
-        val lastTimePickerState = rememberTimePickerState()
+        val firstTimePickerState = rememberTimePickerState(initialHour = 8)
+        val lastTimePickerState = rememberTimePickerState(initialHour = 20)
+
+        
 
         Text("First reminder")
         TimeInput(
@@ -185,29 +188,30 @@ fun OnboardingThirdPage(
 
 @Composable
 fun OnboardingFourthPage(
-    onEvent: (OnboardingScreenEvent) -> Unit
+    onEvent: (OnboardingScreenEvent) -> Unit,
+    uiState: OnboardingScreenUiState
 ) {
     Column {
          Text("How often do you want to be reminded?")
         OutlinedTextField(
-            value = "",
+            value = uiState.interval,
             onValueChange = { onEvent(OnboardingScreenEvent.OnIntervalChanged(it)) },
-            label = { Text("Reminder frequency") }
+            label = { Text("Minutes") }
         )
     }
 }
 
 @Composable
 fun OnboardingFifthPage(
-    onEvent: (OnboardingScreenEvent) -> Unit
+    uiState: OnboardingScreenUiState
 ) {
     Column {
         Text("Is every thing correct?")
-        Text("You weigh 80kg")
-        Text("We should remind you every 2 hours")
+        Text("You weigh ${uiState.weight}kg")
+        Text("We should remind you every ${uiState.interval} minutes")
         Text("From 8am to 8pm")
 
-        Text("If so, you should drink ~2.5L of water per day")
-        Text("At each reminder you should drink 250ml of water")
+        Text("If so, you should drink ~${uiState.totalWaterPerDay} of water per day")
+        Text("At each reminder you should drink ${uiState.waterPerInterval} of water")
     }
 }
