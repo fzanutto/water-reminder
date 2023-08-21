@@ -23,7 +23,6 @@ jobs:
 
       - name: Build iOS
         run: |
-          cd iosApp
-          pod install
-          cd ../
+          ./gradlew :shared:podInstall
+          ./gradlew :shared:podImport
           xcodebuild -workspace iosApp/iosApp.xcworkspace -scheme iosApp -configuration Debug -sdk iphonesimulator -arch arm64
