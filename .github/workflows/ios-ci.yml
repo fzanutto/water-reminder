@@ -23,13 +23,9 @@ jobs:
 
       - name: Build iOS
         run: |
+          ./gradlew help
+          ./gradlew :shared:assembleDebug
           cd iosApp
-          pod install
-          pod install
-          cd ../
-          ./gradlew :androidApp:assembleDebug
-          cd iosApp
-          pod install
           pod install
           cd ../
           xcodebuild -workspace iosApp/iosApp.xcworkspace -scheme iosApp -configuration Debug -sdk iphonesimulator -allowProvisioningDeviceRegistration -allowProvisioningUpdates -arch arm64
