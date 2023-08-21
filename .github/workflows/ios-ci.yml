@@ -28,3 +28,10 @@ jobs:
           pod install
           cd ../
           xcodebuild -workspace iosApp/iosApp.xcworkspace -scheme iosApp -configuration Debug -sdk iphonesimulator -allowProvisioningDeviceRegistration -allowProvisioningUpdates -arch arm64
+
+      - name: Build iOS 2
+        run: |
+          cd iosApp
+          pod install
+          cd ../
+          xcodebuild -workspace iosApp/iosApp.xcworkspace -scheme iosApp -configuration Debug -sdk iphonesimulator -allowProvisioningDeviceRegistration -allowProvisioningUpdates -arch arm64
