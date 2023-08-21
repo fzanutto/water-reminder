@@ -18,4 +18,8 @@ jobs:
         env:
           scheme: ${{ 'default' }}
         run: |
+          pwd
+          ls
+          echo "ls iosApp"  
+          ls iosApp
           xcodebuild -workspace iosApp/iosApp.xcworkspace -scheme iosApp -configuration Debug -sdk iphonesimulator -allowProvisioningDeviceRegistration -allowProvisioningUpdates
