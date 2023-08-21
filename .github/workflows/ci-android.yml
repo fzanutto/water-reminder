@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: Build Android application
     runs-on: ubuntu-latest
 
     steps:

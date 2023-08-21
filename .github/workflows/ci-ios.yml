@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: Build iOS application
     runs-on: macos-latest
 
     steps:
