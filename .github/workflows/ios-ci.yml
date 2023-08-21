@@ -20,11 +20,15 @@ jobs:
           java-version: '17'
           distribution: 'oracle'
           cache: gradle
-      - name: Install Dependencies
+
+      - name: Build Android
+        run: ./gradlew :androidApp:assembleDebug
+
+      - name: Install iOS Dependencies
         run: |
           cd iosApp
           pod install
-        shell: bash
-      - name: Build
+
+      - name: Build iOS
         run: |
           xcodebuild -workspace iosApp/iosApp.xcworkspace -scheme iosApp -configuration Debug -sdk iphonesimulator -allowProvisioningDeviceRegistration -allowProvisioningUpdates
