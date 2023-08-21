@@ -43,9 +43,20 @@ class OnboardingScreenModel(
         }
     }
 
-    private fun updateWaterValues() {
-        val totalWaterInMl = uiState.weight.toInt() * 35
+    private fun String.safeToInt() = toIntOrNull() ?: 0
 
-        uiState = uiState.copy(totalWaterPerDay = totalWaterInMl.toString())
+    private fun updateWaterValues() {
+        val totalWaterInMl = uiState.weight.safeToInt() * 35
+        val intervalInMinutes = uiState.interval.safeToInt().coerceAtLeast(1)
+
+        val deltaTime = (uiState.endTimeHour * 60 + uiState.endTimeMinute) -
+                (uiState.startTimeHour * 60 + uiState.startTimeMinute).coerceAtLeast(1)
+
+        val waterPerInterval = totalWaterInMl / (deltaTime / intervalInMinutes)
+
+        uiState = uiState.copy(
+            totalWaterPerDay = totalWaterInMl.toString(),
+            waterPerInterval = waterPerInterval.toString()
+        )
     }
 }

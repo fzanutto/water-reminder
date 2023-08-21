@@ -172,8 +172,7 @@ fun OnboardingThirdPage(
         val firstTimePickerState = rememberTimePickerState(initialHour = 8)
         val lastTimePickerState = rememberTimePickerState(initialHour = 20)
 
-        
-
+        // TODO: when TimePickerDialog comes to commonMain use it and call onEvent to update the state
         Text("First reminder")
         TimeInput(
             state = firstTimePickerState
