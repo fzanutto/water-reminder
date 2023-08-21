@@ -31,4 +31,7 @@ jobs:
 
       - name: Build iOS
         run: |
+          cd iosApp
+          pod install
+          cd ../
           xcodebuild -workspace iosApp/iosApp.xcworkspace -scheme iosApp -configuration Debug -sdk iphonesimulator -allowProvisioningDeviceRegistration -allowProvisioningUpdates -arch arm64
