@@ -23,7 +23,6 @@ jobs:
 
       - name: Build iOS
         run: |
-          ./gradlew help
           ./gradlew :shared:assembleDebug
           cd iosApp
           pod install
