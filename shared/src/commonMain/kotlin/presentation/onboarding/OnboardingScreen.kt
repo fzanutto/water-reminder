@@ -210,7 +210,7 @@ fun OnboardingFifthPage(
         Text("We should remind you every ${uiState.interval} minutes")
         Text("From 8am to 8pm")
 
-        Text("If so, you should drink ~${uiState.totalWaterPerDay} of water per day")
-        Text("At each reminder you should drink ${uiState.waterPerInterval} of water")
+        Text("If so, you should drink ~${uiState.totalWaterPerDay} ml of water per day")
+        Text("At each reminder you should drink ${uiState.waterPerInterval} ml of water")
     }
 }
