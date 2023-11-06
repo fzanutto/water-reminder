@@ -23,7 +23,7 @@ kotlin {
             isStatic = true
         }
     }
-    val voyagerVersion = "1.0.0-rc08"
+    val voyagerVersion = "1.0.0-rc09"
 
     sourceSets {
         val commonMain by getting {
