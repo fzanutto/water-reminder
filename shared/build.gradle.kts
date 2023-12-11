@@ -38,7 +38,7 @@ kotlin {
                 implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
 
                 // Kodein (DI)
-                implementation("org.kodein.di:kodein-di-framework-compose:7.20.2")
+                implementation("org.kodein.di:kodein-di-framework-compose:7.21.1")
 
                 // Kodein integration (DI)
                 implementation("cafe.adriel.voyager:voyager-kodein:$voyagerVersion")
