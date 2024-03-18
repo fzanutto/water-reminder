@@ -38,6 +38,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import presentation.components.TopBar
+import waterreminder.shared.generated.resources.Res
+import waterreminder.shared.generated.resources.water_drop
 
 
 class ReminderScreen: Screen {
@@ -122,7 +124,7 @@ private fun MainContent(
                 )
             } else {
                 Icon(
-                    painter = painterResource("water_drop.xml"),
+                    painter = painterResource(Res.drawable.water_drop),
                     contentDescription = null,
                     modifier = Modifier
                         .padding(54.dp)
