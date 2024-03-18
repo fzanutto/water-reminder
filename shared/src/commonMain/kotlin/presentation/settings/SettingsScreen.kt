@@ -5,9 +5,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -36,7 +35,6 @@ class SettingsScreen: Screen {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreenContent(
     onEvent: (SettingsScreenEvent) -> Unit,
@@ -46,7 +44,7 @@ fun SettingsScreenContent(
         topBar = {
             TopBar(
                 title = "Settings",
-                leadingIcon = Icons.Default.ArrowBack,
+                leadingIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onClickLeadingIcon = { onEvent(SettingsScreenEvent.OnClickBack) }
             )
         },
@@ -69,7 +67,6 @@ fun SettingsScreenContent(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainContent(
     paddingValues: PaddingValues,
