@@ -31,14 +31,13 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
 
                 // Navigator
                 implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
 
                 // Koin
-                implementation("io.insert-koin:koin-core:3.5.3")
+                implementation("io.insert-koin:koin-core:3.2.0")
 
                 // Koin integration
                 implementation("cafe.adriel.voyager:voyager-koin:$voyagerVersion")
