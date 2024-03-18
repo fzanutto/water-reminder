@@ -54,11 +54,7 @@ kotlin {
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependencies {
-                //implementation("co.touchlab:stately-common:2.0.5")
-            }
-        }
+        val iosMain by creating
     }
 }
 
