@@ -1,22 +1,21 @@
 package presentation.di
 
 import cafe.adriel.voyager.navigator.Navigator
-import org.kodein.di.DI
-import org.kodein.di.bindFactory
+import org.koin.dsl.module
 import presentation.onboarding.OnboardingScreenModel
 import presentation.reminder.ReminderScreenModel
 import presentation.settings.SettingsScreenModel
 
-val presentationModule = DI.Module("presentation") {
-    bindFactory {navigator: Navigator ->
+val presentationModule = module {
+    factory { (navigator: Navigator) ->
         SettingsScreenModel(navigator)
     }
 
-    bindFactory {navigator: Navigator ->
+    factory {(navigator: Navigator) ->
         ReminderScreenModel(navigator)
     }
 
-    bindFactory {navigator: Navigator ->
+    factory {(navigator: Navigator) ->
         OnboardingScreenModel(navigator)
     }
 }

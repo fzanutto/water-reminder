@@ -5,9 +5,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -15,17 +14,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.kodein.rememberScreenModel
+import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import org.koin.core.parameter.parametersOf
 import presentation.components.TopBar
 
 class SettingsScreen: Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val screenModel = rememberScreenModel<Navigator, SettingsScreenModel>(arg = navigator)
+        val screenModel = getScreenModel<SettingsScreenModel> {
+            parametersOf(navigator)
+        }
 
         SettingsScreenContent(
             onEvent = screenModel::onEvent,
@@ -34,7 +35,6 @@ class SettingsScreen: Screen {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreenContent(
     onEvent: (SettingsScreenEvent) -> Unit,
@@ -44,7 +44,7 @@ fun SettingsScreenContent(
         topBar = {
             TopBar(
                 title = "Settings",
-                leadingIcon = Icons.Default.ArrowBack,
+                leadingIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onClickLeadingIcon = { onEvent(SettingsScreenEvent.OnClickBack) }
             )
         },
@@ -67,7 +67,6 @@ fun SettingsScreenContent(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainContent(
     paddingValues: PaddingValues,

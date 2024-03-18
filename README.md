@@ -10,6 +10,6 @@ Calculates how much water is needed daily based on user weight and at regular in
 ## Libraries and tools
 - Kotlin Multiplatoform
 - Compose Multiplatform
-- Kodein (DI library)
+- Koin (DI library)
 - Voyager (Compose Multiplatform navigation library)
 

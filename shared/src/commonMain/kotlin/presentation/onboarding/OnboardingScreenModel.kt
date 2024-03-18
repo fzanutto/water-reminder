@@ -20,7 +20,9 @@ class OnboardingScreenModel(
                 navigator.push(ReminderScreen())
             }
 
-            OnboardingScreenEvent.OnClickFinish -> TODO()
+            OnboardingScreenEvent.OnClickFinish -> {
+                // TODO
+            }
             is OnboardingScreenEvent.OnStartTimeChanged -> {
                 updateWaterValues()
             }
