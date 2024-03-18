@@ -31,12 +31,12 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.kodein.rememberScreenModel
+import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.koin.core.parameter.parametersOf
 import presentation.components.TopBar
 import waterreminder.shared.generated.resources.Res
 import waterreminder.shared.generated.resources.water_drop
@@ -46,7 +46,9 @@ class ReminderScreen: Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val screenModel = rememberScreenModel<Navigator, ReminderScreenModel>(arg = navigator)
+        val screenModel = getScreenModel<ReminderScreenModel> {
+            parametersOf(navigator)
+        }
 
         ReminderScreenContent(
             screenModel::onEvent
