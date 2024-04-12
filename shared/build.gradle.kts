@@ -37,7 +37,7 @@ kotlin {
                 implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
 
                 // Koin
-                implementation("io.insert-koin:koin-core:3.2.0")
+                implementation("io.insert-koin:koin-core:3.5.5")
 
                 // Koin integration
                 implementation("cafe.adriel.voyager:voyager-koin:$voyagerVersion")
