@@ -45,7 +45,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                api("androidx.activity:activity-compose:1.8.2")
+                api("androidx.activity:activity-compose:1.9.0")
                 api("androidx.core:core-ktx:1.12.0")
                 api(compose.preview)
                 api(compose.uiTooling)
